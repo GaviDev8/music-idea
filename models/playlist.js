@@ -21,6 +21,12 @@ Playlist.init({
       model: 'users',
       key: 'id'
     }
+  },
+  playlistId: {
+    type: DataTypes.UUID,
+    defaultValue: DataTypes.UUIDV4,
+    allowNull: false,
+    unique: true
   }
 }, {
   sequelize,
@@ -29,3 +35,12 @@ Playlist.init({
 });
 
 module.exports = Playlist;
+
+/*
+Something for Gabriela to set up routes to the playlists
+
+router.get('/playlist/:uuid'
+
+const playlist = await Playlist.findOne({ where: { playlistId: req.params.uuid }
+res.render('playlist', { playlist });
+*/
