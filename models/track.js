@@ -21,6 +21,9 @@ Track.init({
   album: {
     type: DataTypes.STRING
   },
+  imageURL: {
+    type: DataTypes.STRING
+  },
 }, {
   sequelize,
   modelName: 'Track',
