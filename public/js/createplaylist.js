@@ -38,11 +38,7 @@ albumButton.addEventListener('click', handleClick);
 {/* /////////////////////////////////////// */}
 {/* Song list for playlist that have been created created */}
 
-<ul class="song_list">
-  {{#each Track}}
-  {{> track}}
-  {{/each}}
-</ul>
+
 
 
 {/* ///////////////////////////////////// */}
