@@ -7,11 +7,11 @@
         <label for="genre">Genre</label>
         <input type="text" class="genre" name="genre">
         <button type="submit" id="genreBtn">🔍</button>
-    
+    <p>and/or</p>
         <label for="artist">Artist</label>
         <input type="text" class="artist" name="artist">
         <button type="submit" id="artistBtn">🔍</button>
-    
+    <p>and/or</p>
         <label for="album">Album</label>
         <input type="text" class="album" name="album">
         <button type="submit" id="albumBtn">🔍</button>
