@@ -1,39 +1,26 @@
 const router = require('express').Router();
 const { Track } = require('../../models');
-const { User, Playlist, PlaylistTrack } = require("../models");
 
-// find all tracks
+// find all tracks - may not need?
 router.get("/", async (req, res) => {
-    try {
-      const tracks = await Track.findAll({
-        include: [
-          {
-            model: User,
-          },
-          {
-            model: Playlist,
-          },
-          {
-            model: PlaylistTrack,
-          },
-        ],
-      });
-      res.status(200).json(tracks);
-    } catch (err) {
-      console.error(err);
-      res.status(500).json(err);
-    }
-  });
+  try {
+    const tracks = await Track.findAll();
+    res.status(200).json(tracks);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json(err);
+  }
+});
   
   // find tracks by id
   router.get("/:id", async (req, res) => {
     try {
-      const tracks = await Track.findAll({
+      const tracks = await Track.findOne({
         where: {
           id: req.params.id,
         },
       });
-      res.status(200).json(comments);
+      res.status(200).json(track);
     } catch (err) {
       res.status(500).json(err);
     }
@@ -44,9 +31,11 @@ router.get("/", async (req, res) => {
     try {
       console.log(req.body);
       const newTrack = await Track.create({
-        ...req.body,
-        id: req.session.id, // should this be by user_id or playlistId?
-        
+        title: req.body.title,
+        artist: req.body.artist,
+        album: req.body.album,
+        imageURL: req.body.imageURL,
+        userId: req.session.user_id,
       });
       res.status(200).json(newTrack);
     } catch (err) {

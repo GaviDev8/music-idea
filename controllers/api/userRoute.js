@@ -4,7 +4,7 @@ const { User } = require("../../models");
 const auth = require('../../utils/auth');
 
 // user login 
-router.post('/login', async (req, res) => {
+router.post('/login', auth, async (req, res) => {
     try {
         const userData = await User.findOne({
             where: { username: req.body.username},

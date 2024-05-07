@@ -1,2 +1,10 @@
 const router = require('express').Router();
-const { User, Playlist, Track } = require("../models");
+const { PlaylistTrack } = require("../models");
+
+
+// route to add a track to a playlist
+router.post('/:playlistId/addTrack/:trackId', async (req, res) => {
+    try {
+        const {}
+    }
+})
