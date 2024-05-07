@@ -28,7 +28,7 @@ const albumButton = document.getElementById('albumBtn');
 
 // Step 3: Write the Event Listener Function
 function handleClick() {
-  console.log('Button clicked!');
+  console.log('search initiated....');
 }
 
 // Step 4: Attach the Event Listener
