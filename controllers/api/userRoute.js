@@ -1,7 +1,7 @@
 // connections
 const router = require('express').Router();
-const {} = require("../models");
-const auth = require('../utils/auth');
+const { User } = require("../../models");
+const auth = require('../../utils/auth');
 
 // user login 
 router.post('/login', async (req, res) => {
@@ -21,7 +21,6 @@ router.post('/login', async (req, res) => {
         req.session.save(() => {
             req.session.user_id = userData.id;
             req.session.logged_in = true;
-            req.session.user = userData;
             res.json({user: userData, message: "You are logged in!"});
         });
     } catch (error) {
@@ -40,22 +39,22 @@ router.post("/logout", (req, res) => {
     }
   });
   
-  
+  // sign-ups 
+  router.post("/signup", async (req, res) => {
+    try {
+        const userData = await User.create({
+            ...req.body,
+        });
+        req.session.save(() => {
+            req.session.user_id = userData.id;
+            req.session.logged_in = true;
+            res.json({user: userData, message: "You are registered"})
+        });
+    } catch(err) {
+      res.status(400).json(err)
+    }
+});
+
   module.exports = router;
 
 
-
-// In case we need for sign-ups -> ignore for now
-// router.get("/", async (req, res) => {
-//     try {
-//         const userData = await User.create({
-//             ...req.body,
-//         });
-//         req.session.save(()) => {
-//             req.session.user_id = userData.id;
-//             req.session.logged_in = true;
-//             req.session.user = userData;
-//             res.json({user: userData, message: "You are registered"})
-//         }
-//     }
-// })

@@ -1,2 +1,2 @@
 const router = require('express').Router();
-const {} = require("../models");
+const { User, Playlist, Track } = require("../models");
