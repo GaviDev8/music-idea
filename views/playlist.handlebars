@@ -1,28 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>User Playlist</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
-    <link rel="stylesheet" href="./assets/css/styles.css" />
-  </head>
-  <body>
-    <header>
-      <section class="playlist-name">
-        <h1> User Playlist</h1>
-      </section>
-      <nav class="navbar">
-        <a href="#">Login/Logout</a>
-        <a href="#">Play List</a>
-        <a href="#">Create Playlist</a>
-      </nav>
-    </header>
-
-    <section id="playlistContainer">
-        {{{body}}}
+ <section id="playlistContainer">
+       {{#each userPlaylists}}
+        <div class='row'>
+          <ul class="song_list">
+            {{#each Track}}
+            {{> track}}
+             {{/each}}
+          </ul>
+        </div>
     </section>
-    <script id="playlist-template" type="text/x-handlebars-template">
+    {{!-- <script id="playlist-template" type="text/x-handlebars-template">
       {{#each userPlaylists}}
         <section class='row'>
           {{#each this}}
@@ -39,9 +25,8 @@
           {{/each}}
         </section>
       {{/each}}
-    </script>
+    </script> --}}
 
-    <script src="./assets/js/playlist.js"></script>
-  </body>
-</html>
+    {{!-- <script src="/js/playlist.js"></script> --}}
+ 
 
