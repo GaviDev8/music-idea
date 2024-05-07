@@ -5,9 +5,9 @@ class Track extends Model {}
 
 Track.init({
   id: {
-    type: DataTypes.UUID,
-    defaultValue: DataTypes.UUIDV4,
+    type: DataTypes.INTEGER,
     primaryKey: true,
+    autoIncrement: true,
     allowNull: false
   },
   title: {
@@ -19,15 +19,16 @@ Track.init({
     allowNull: false
   },
   album: {
-    type: DataTypes.STRING
+    type: DataTypes.STRING, // Optional
   },
   imageURL: {
-    type: DataTypes.STRING
+    type: DataTypes.STRING // Optional
   },
 }, {
   sequelize,
   modelName: 'Track',
-  tableName: 'tracks'
+  tableName: 'tracks',
+  timestamps: false
 });
 
 module.exports = Track;

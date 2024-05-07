@@ -23,15 +23,6 @@ Track.belongsToMany(Playlist, {
   otherKey: 'playlistId'
 });
 
-// Sync
-sequelize.sync({ force: true })
-  .then(() => {
-    console.log("Database synced");
-  })
-  .catch((error) => {
-    console.error("Failed to sync database: ", error);
-  });
-
 module.exports = {
   User,
   Playlist,

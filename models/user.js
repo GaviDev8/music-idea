@@ -5,9 +5,9 @@ class User extends Model {}
 
 User.init({
   id: {
-    type: DataTypes.UUID,
-    defaultValue: DataTypes.UUIDV4,
+    type: DataTypes.INTEGER,
     primaryKey: true,
+    autoIncrement: true,
     allowNull: false
   },
   username: {
@@ -31,7 +31,7 @@ User.init({
 }, {
   sequelize,
   modelName: 'User',
-  tableName: 'users',
+  tableName: 'groov_users',
   timestamps: true,
   updatedAt: false
 });

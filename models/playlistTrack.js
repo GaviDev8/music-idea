@@ -5,14 +5,14 @@ class PlaylistTrack extends Model {}
 
 PlaylistTrack.init({
   playlistId: {
-    type: DataTypes.UUID,
+    type: DataTypes.INTEGER,
     references: {
       model: 'playlists',
       key: 'id'
     }
   },
   trackId: {
-    type: DataTypes.UUID,
+    type: DataTypes.INTEGER,
     references: {
       model: 'tracks',
       key: 'id'
