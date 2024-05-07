@@ -9,18 +9,29 @@
     <link rel="stylesheet" href="./css/styles.css">
 </head>
 <header>
-    <section class="head1">
-        <section class="logo">
+    <div class="head1">
+        <div class="logo">
             <div class="bar"></div>
             <div class="bar"></div>
             <div class="bar"></div>
             <div class="bar"></div>
-        </section>
-        <section class="page-name">
+        </div>
+        <div class="page-name">
             <h1>Groov</h1>
-        </section>
-    </section>
+        </div>
+        {{#if logged_in}}
+        <nav class="navbar">
+            <a href="#">Login/Logout</a>
+            <a href="#">Play List</a>
+            <a href="#">Create Playlist</a>
+        </nav>
+        {{/if}}
+        </div>
 </header>
+
+
+
+
 <main>
 {{{body}}}
 </main>
