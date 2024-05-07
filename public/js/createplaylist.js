@@ -40,10 +40,7 @@ albumButton.addEventListener('click', handleClick);
 
 <ul class="song_list">
   {{#each Track}}
-    <li>{{imageURL}}</li>
-    <li>{{title}}</li>
-    <li>{{artist}}</li>
-    <li>{{album}}</li>
+  {{> track}}
   {{/each}}
 </ul>
 
