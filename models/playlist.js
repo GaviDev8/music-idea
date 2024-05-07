@@ -1,13 +1,13 @@
 const { Model, DataTypes } = require('sequelize');
-const sequelize = require('./index');
+const sequelize = require('../config/config');
 
 class Playlist extends Model {}
 
 Playlist.init({
   id: {
-    type: DataTypes.UUID,
-    defaultValue: DataTypes.UUIDV4,
+    type: DataTypes.INTEGER,
     primaryKey: true,
+    autoIncrement: true,
     allowNull: false
   },
   title: {
@@ -15,14 +15,14 @@ Playlist.init({
     allowNull: false
   },
   userId: {
-    type: DataTypes.UUID,
+    type: DataTypes.INTEGER,
     allowNull: false,
     references: {
-      model: 'users',
+      model: 'groov_users',
       key: 'id'
     }
   },
-  playlistId: {
+  publicId: {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
     allowNull: false,
@@ -35,12 +35,3 @@ Playlist.init({
 });
 
 module.exports = Playlist;
-
-/*
-Something for Gabriela to set up routes to the playlists
-
-router.get('/playlist/:uuid'
-
-const playlist = await Playlist.findOne({ where: { playlistId: req.params.uuid }
-res.render('playlist', { playlist });
-*/

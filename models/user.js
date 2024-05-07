@@ -1,13 +1,13 @@
 const { Model, DataTypes } = require('sequelize');
-const sequelize = require('./index');
+const sequelize = require('../config/config');
 
 class User extends Model {}
 
 User.init({
   id: {
-    type: DataTypes.UUID,
-    defaultValue: DataTypes.UUIDV4,
+    type: DataTypes.INTEGER,
     primaryKey: true,
+    autoIncrement: true,
     allowNull: false
   },
   username: {
@@ -15,8 +15,8 @@ User.init({
     allowNull: false,
     unique: true,
     validate: {
-      isAlphanumeric: true, // Only letters and numbers
-      len: [3, 25] // Restricts username length
+      isAlphanumeric: true,
+      len: [3, 25]
     }
   },
   password: {
@@ -31,7 +31,7 @@ User.init({
 }, {
   sequelize,
   modelName: 'User',
-  tableName: 'users',
+  tableName: 'groov_users',
   timestamps: true,
   updatedAt: false
 });
