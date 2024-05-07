@@ -14,7 +14,8 @@ Playlist.belongsTo(User, { foreignKey: 'userId' });
 Playlist.belongsToMany(Track, {
   through: PlaylistTrack,
   foreignKey: 'playlistId',
-  otherKey: 'trackId'
+  otherKey: 'trackId',
+  as: 'tracks'
 });
 
 Track.belongsToMany(Playlist, {
