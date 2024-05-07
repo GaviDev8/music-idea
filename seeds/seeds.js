@@ -1,26 +1,27 @@
-const { User, Playlist, Track, PlaylistTrack } = require('../models');
+const seedUsers = require('./user-seeds');
+const seedPlaylists = require('./playlists-seeds');
+const seedTracks = require('./tracks-seeds');
+const seedPlaylistTracks = require('./playlistTrack-seeds');
 
-async function seedDatabase() {
-  try {
-    // Create users
-    const user1 = await User.create({ username: 'user1', password: 'password1' });
-    const user2 = await User.create({ username: 'user2', password: 'password2' });
+const sequelize = require('../config/connection');
 
-    // Create playlists
-    const playlist1 = await Playlist.create({ title: 'Playlist 1', userId: user1.id });
-    const playlist2 = await Playlist.create({ title: 'Playlist 2', userId: user2.id });
+const seedAll = async () => {
+  await sequelize.sync({ force: true });
+  console.log('\n----- DATABASE SYNCED -----\n');
 
-    // Create tracks
-    const track1 = await Track.create({ title: 'Track 1', artist: 'Artist 1', album: 'Album 1' });
-    const track2 = await Track.create({ title: 'Track 2', artist: 'Artist 2', album: 'Album 2' });
+  await seedUsers();
+  console.log('\n----- USERS SEEDED -----\n');
 
-    // Associate tracks with playlists
-    await PlaylistTrack.create({ playlistId: playlist1.id, trackId: track1.id });
-    await PlaylistTrack.create({ playlistId: playlist1.id, trackId: track2.id });
-    await PlaylistTrack.create({ playlistId: playlist2.id, trackId: track2.id });
+  await seedPlaylists();
+  console.log('\n----- PLAYLISTS SEEDED -----\n');
 
-    console.log('Seed data created!');
-  } catch (error) { console.error('Error seeding database:', error); }
-}
+  await seedTracks();
+  console.log('\n----- TRACKS SEEDED -----\n');
 
-seedDatabase();
+  await seedPlaylistTracks();
+  console.log('\n----- PLAYLIST TRACKS SEEDED -----\n');
+
+  process.exit(0);
+};
+
+seedAll();
