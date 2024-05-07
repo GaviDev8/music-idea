@@ -1,5 +1,5 @@
 const { Model, DataTypes } = require('sequelize');
-const sequelize = require('./index');
+const sequelize = require('../config/config');
 
 class User extends Model {}
 
@@ -15,8 +15,8 @@ User.init({
     allowNull: false,
     unique: true,
     validate: {
-      isAlphanumeric: true, // Only letters and numbers
-      len: [3, 25] // Restricts username length
+      isAlphanumeric: true,
+      len: [3, 25]
     }
   },
   password: {
