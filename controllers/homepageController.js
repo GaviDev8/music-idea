@@ -1,11 +1,17 @@
 const router = require('express').Router();
 const { User, Track, Playlist, PlaylistTrack } = require('../models');
-// connect auth once done
+const auth = require('../utils/auth')
 
 // Render to homepage
-router.get("/", async (req, res) => {
-    try {
-        res.render("homepage", { Track, Playlist });
+router.get("/", auth, async (req, res) => {
+    try {  
+    const playlistData = await Playlist.findAll({
+      where: { userId: req.session.user_id}, 
+      include: [{model: Track, through: PlaylistTrack, as: 'tracks' }]
+    }); 
+    const playlist = playlistData.map((list) => list.get({plain: true}))
+    console.log(playlist)  
+    res.render("home", {playlist, logged_in: req.session.logged_in});
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: "Error" });
@@ -27,7 +33,7 @@ router.get("/login", async (req, res) => {
       res.redirect("/");
       return;
     }
-    res.render("register");
+    res.render("login");
   });
 
   module.exports = router;
