@@ -1,0 +1,32 @@
+ <section id="playlistContainer">
+       {{#each userPlaylists}}
+        <div class='row'>
+          <ul class="song_list">
+            {{#each Track}}
+            {{> track}}
+             {{/each}}
+          </ul>
+        </div>
+    </section>
+    {{!-- <script id="playlist-template" type="text/x-handlebars-template">
+      {{#each userPlaylists}}
+        <section class='row'>
+          {{#each this}}
+            <section class='col'>
+              <section class='playlist-info'>
+                <section><img
+                    src='{{imageURL}}'
+                    alt='Album Image'
+                  /></section>
+                  <section>{{title}} <br />{{artist}} <br />{{album}}</section>
+
+              </section>
+            </section>
+          {{/each}}
+        </section>
+      {{/each}}
+    </script> --}}
+
+    {{!-- <script src="/js/playlist.js"></script> --}}
+ 
+
