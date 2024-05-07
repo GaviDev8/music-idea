@@ -20,7 +20,7 @@
 </div>
 
 
-//addEventListene
+//addEventListener
 const genreButton = document.getElementById('genreBtn');
 const artistButton = document.getElementById('artistBtn');
 const albumButton = document.getElementById('albumBtn');
@@ -39,8 +39,11 @@ albumButton.addEventListener('click', handleClick);
 {/* Song list for playlist that have been created created */}
 
 <ul class="song_list">
-  {{#each song}}
-    <li>{{this}}</li>
+  {{#each Track}}
+    <li>{{imageURL}}</li>
+    <li>{{title}}</li>
+    <li>{{artist}}</li>
+    <li>{{album}}</li>
   {{/each}}
 </ul>
 
