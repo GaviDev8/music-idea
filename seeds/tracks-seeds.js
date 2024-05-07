@@ -1,12 +1,18 @@
 const { Track } = require('../models');
 
-const trackData = [
-  { title: 'Track 1', artist: 'Artist 1', album: 'Album 1' },
-  { title: 'Track 2', artist: 'Artist 2', album: 'Album 2' }
-];
-
 const seedTracks = async () => {
-  await Track.bulkCreate(trackData);
+  const count = await Track.count();
+  if (count === 0) {
+    const tracks = await Track.bulkCreate([
+      { title: 'Imagine', artist: 'John Lennon', album: 'Imagine', imageURL: 'path/to/image1.jpg' },
+      { title: 'What a Wonderful World', artist: 'Louis Armstrong', album: 'What a Wonderful World', imageURL: 'path/to/image2.jpg' }
+    ]);
+    console.log('Tracks seeded');
+    return tracks;
+  } else {
+    console.log('Tracks already seeded');
+    return await Track.findAll();
+  }
 };
 
 module.exports = seedTracks;
