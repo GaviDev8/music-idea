@@ -36,13 +36,14 @@ router.get("/:playlistId", async (req, res) => {
   // should i include the auth there?
   router.post("/", async (req, res) => {
     try {
-      const newPlaylist = await Playlist.create({
-        ...req.body,
-        userId: req.session.user_id,
-      });
-      res.status(200).json(newPlaylist);
-    } catch (err) {
-      res.status(400).json(err);
+      // Title
+      const { title } = req.body;
+      // Create Playlist with info from createplaylist.js
+      const newPlaylist = await Playlist.create({ title });
+      res.json(newPlaylist);
+    } catch (error) {
+      console.error('Error creating playlist:', error);
+      res.status(400).json({ error: error.toString() });
     }
   });
 
