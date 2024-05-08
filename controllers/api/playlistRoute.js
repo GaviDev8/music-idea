@@ -39,7 +39,10 @@ router.get("/:playlistId", async (req, res) => {
       // Title
       const { title } = req.body;
       // Create Playlist with info from createplaylist.js
-      const newPlaylist = await Playlist.create({ title });
+      const newPlaylist = await Playlist.create({
+        title: req.body.title,
+        userId: req.body.userId,
+      });
       res.json(newPlaylist);
     } catch (error) {
       console.error('Error creating playlist:', error);
