@@ -1,89 +1,104 @@
-document.addEventListener("DOMContentLoaded", function() {
-    // Function to add selected song to the list
-    function addSongToList(song) {
-        const selectedSongsList = document.querySelector('#selectedSongs');
-        const listItem = document.createElement('li');
-        listItem.textContent = song;
-        selectedSongsList.appendChild(listItem);
-    }
-
-    // Event listener for genre button
-    genreBtn.addEventListener('click', function(event) {
-        event.preventDefault();
-        const genre = genreInput.value.trim();
-        //get url for api data
-        const url = ``
-        if (genre !== '') {
-            // Fetch songs based on genre and render search results
-            const searchResults = fetch(url,{
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-            });
-            renderSearchResults(searchResults);
-        }
-    });
-
-    // Event listener for artist button
-    artistBtn.addEventListener('click', function(event) {
-        event.preventDefault();
-        const artist = artistInput.value.trim();
-        if (artist !== '') {
-            // Fetch songs based on artist and render search results
-            const searchResults = fetchSongsByArtist(artist); // Example function call
-            renderSearchResults(searchResults);
-        }
-    });
-
-    // Event listener for album button
-    albumBtn.addEventListener('click', function(event) {
-        event.preventDefault();
-        const album = albumInput.value.trim();
-        if (album !== '') {
-            // Fetch songs based on album and render search results
-            const searchResults = fetchSongsByAlbum(album); // Example function call
-            renderSearchResults(searchResults);
-        }
-    });
-
-    // Function to render search results
+document.addEventListener("DOMContentLoaded", function () {
+    // Render search results
     function renderSearchResults(results) {
-        const searchResultsContainer = document.querySelector('#searchResults');
-        searchResultsContainer.innerHTML = ''; // Clear previous results
-
-        results.forEach(song => {
-            const listItem = document.createElement('div');
-            listItem.innerHTML = `
-                <label>
-                    <input type="checkbox" class="songCheckbox">
-                    ${song}
-                </label>
-            `;
-            searchResultsContainer.appendChild(listItem);
-
-            // Add event listener to each checkbox
-            const checkbox = listItem.querySelector('.songCheckbox');
-            checkbox.addEventListener('change', function() {
-                if (checkbox.checked) {
-                    addSongToList(song);
-                } else {
-                    // Remove from the selected songs list if unchecked
-                    removeSongFromList(song);
-                }
-            });
+      const searchResultsContainer = document.querySelector("#searchResults");
+      searchResultsContainer.innerHTML = "";
+  
+      results.forEach((track) => {
+        const listItem = document.createElement("div");
+        listItem.innerHTML = `
+          <label>
+            <input type="checkbox" class="songCheckbox">
+            ${track.title} by ${track.artist} (Album: ${track.album.title})
+          </label>
+        `;
+        searchResultsContainer.appendChild(listItem);
+  
+        // Event listener for each checkbox
+        const checkbox = listItem.querySelector(".songCheckbox");
+        checkbox.addEventListener("change", function () {
+          if (checkbox.checked) {
+            addSongToList(track);
+          } else {
+            removeSongFromList(track);
+          }
         });
+      });
     }
-
-    // Function to remove selected song from the list
-    function removeSongFromList(song) {
-        const selectedSongsList = document.querySelector('#selectedSongs');
-        const items = selectedSongsList.getElementsByTagName('li');
-        for (let i = 0; i < items.length; i++) {
-            if (items[i].textContent === song) {
-                selectedSongsList.removeChild(items[i]);
-                break; // Exit loop once removed
-            }
+  
+    // Add a song to the selected songs list
+    function addSongToList(track) {
+      const selectedSongsContainer = document.querySelector("#selectedSongs");
+      const listItem = document.createElement("li");
+      listItem.textContent = `${track.title} by ${track.artist}`;
+      // Store track ID so I can remove it later
+      listItem.dataset.id = track.id;
+      selectedSongsContainer.appendChild(listItem);
+    }
+  
+    // Remove a song from the selected songs list
+    function removeSongFromList(track) {
+      const selectedSongsContainer = document.querySelector("#selectedSongs");
+      const listItem = selectedSongsContainer.querySelector(`[data-id="${track.id}"]`);
+      if (listItem) {
+        selectedSongsContainer.removeChild(listItem);
+      }
+    }
+  
+    // Fetch tracks from the server
+    async function fetchTracks(query) {
+      try {
+        // Our route for searching through the npm package, see searchRoute.js for more
+        const response = await fetch(`/api/search/${encodeURIComponent(query)}`);
+        if (!response.ok) {
+          throw new Error(`Network error: ${response.statusText}`);
         }
+        const results = await response.json();
+        return results;
+      } catch (error) {
+        console.error("Error during fetch:", error);
+        return [];
+      }
     }
-});
+  
+    // Event listener for searching by title
+    document.querySelector("#titleBtn").addEventListener("click", async (event) => {
+      event.preventDefault();
+      const title = document.querySelector(".title").value.trim();
+      if (title) {
+        const results = await fetchTracks(title);
+        renderSearchResults(results);
+      }
+    });
+  
+    // Event listener for searching by genre
+    document.querySelector("#genreBtn").addEventListener("click", async (event) => {
+      event.preventDefault();
+      const genre = document.querySelector(".genre").value.trim();
+      if (genre) {
+        const results = await fetchTracks(genre);
+        renderSearchResults(results);
+      }
+    });
+  
+    // Event listener for searching by artist
+    document.querySelector("#artistBtn").addEventListener("click", async (event) => {
+      event.preventDefault();
+      const artist = document.querySelector(".artist").value.trim();
+      if (artist) {
+        const results = await fetchTracks(artist);
+        renderSearchResults(results);
+      }
+    });
+  
+    // Event listener for searching by album
+    document.querySelector("#albumBtn").addEventListener("click", async (event) => {
+      event.preventDefault();
+      const album = document.querySelector(".album").value.trim();
+      if (album) {
+        const results = await fetchTracks(album);
+        renderSearchResults(results);
+      }
+    });
+  });
+  

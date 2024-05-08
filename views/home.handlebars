@@ -2,19 +2,23 @@
     <h2>Create Playlist</h2>
 
     <section class="createPlaylist">
-    <form action="" method="get">
+      <form>
+        <label for="title">Title</label>
+        <input type="text" class="title" name="title">
+        <button type="submit" id="titleBtn">🔍</button>
+        <p>and/or</p>
         <label for="genre">Genre</label>
         <input type="text" class="genre" name="genre">
         <button type="submit" id="genreBtn">🔍</button>
-    <p>and/or</p>
+        <p>and/or</p>
         <label for="artist">Artist</label>
         <input type="text" class="artist" name="artist">
         <button type="submit" id="artistBtn">🔍</button>
-    <p>and/or</p>
+        <p>and/or</p>
         <label for="album">Album</label>
         <input type="text" class="album" name="album">
         <button type="submit" id="albumBtn">🔍</button>
-    </form>
+      </form>
     </section>
 </div>
 <div>
@@ -32,8 +36,4 @@
     </ul>
 </div>
 
-
-
-
-
-
+<script src="/js/createplaylist.js"></script>
