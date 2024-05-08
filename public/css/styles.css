@@ -13,7 +13,7 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    min-height: 100vh;
+    min-height: 100%;
     background: linear-gradient(#10202e, #b08e99);
     overflow: auto;
 }
@@ -24,6 +24,19 @@ header {
     align-items: center;
     width: 100%;
     
+}
+.head1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100px;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: slideLeft 3s ease forwards;
+
+
 }
 header .playlist-name {
     display: flex;
@@ -67,23 +80,24 @@ header .navbar a:hover {
     box-shadow: 0 0 20px #99ce13;
 }
 header .page-name h1 {
-    font-size: 80px;
-    color: #fff;
+    font-size: 150px;
+    color: rgba(255, 255, 255, 0.5);
     margin: 20px 10px;
+    text-shadow: 0 0 10px rgba(221, 78, 78, 0.5);
     
 }
 header .logo {
     display: flex;
     align-items: center;
     height: 80px;
-    width: 200px;
+    width: 100px;
     justify-content: space-between;
-    margin-right: 40px;
+    margin-right: 60px;
 }
 
 header .logo .bar {
     width: 20px;
-    height: 40px;
+    height: 60px;
     background-color: #99ce13;
     animation: wave 1s infinite ease-in-out;
 }
@@ -114,17 +128,18 @@ header .logo .bar:nth-child(4) {
 .wrapper{
     position: relative;
     width: 500px;
-    height: 600px;
+    height: 80vh;
 }
 .form-wrapper {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 60%;
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 40%;
     background: #fff;
     box-shadow: 0 0 10px rgba(0,0,0,.2);
 }
@@ -193,11 +208,12 @@ footer {
     flex-direction: column;
     width: 100%;
     height: 100px;
-    background: #071623;
     color: #fff;
     font-size: 20px;
     font-weight: 600;
     margin-top: 20px;
+    opacity: 0;
+    animation: slideRight 3s ease forwards;
 
 }
 
@@ -215,11 +231,34 @@ footer {
 }
 
 
-h2 {
-    font-size: 50px;
-    color: #555;
+#groov-group h2 {
+    font-size: 30px;
+    color: rgba(118, 16, 16, 0.5);
     text-align: center;
     padding-bottom: 40px;
+}
+#groov-group .github-acc {
+    margin-bottom: 90px;
+}
+#groov-group .github-acc a {
+    color: #fff;
+    font-size: 20px;
+    text-decoration: none;
+    font-weight: 600;
+    margin: 0 10px;
+    padding: 10px;
+    transition: .5s;
+}
+#groov-group .github-acc a:hover {
+    background: #6b3556;
+    color: #a8acb5;
+    border-radius: 50%;
+    box-shadow: 0 0 20px #5e384d;
+}
+footer .comment{
+    font-size: 14px;
+    text-align: center;
+    margin: 25px 0;
 }
 .input-group {
     position: relative;
