@@ -4,8 +4,9 @@ const { User } = require("../../models");
 const auth = require('../../utils/auth');
 
 // user login 
-router.post('/login', async (req, res) => {
-    try {
+router.post('/login', auth, async (req, res) => {
+   console.log('login')
+  try {
         const userData = await User.findOne({
             where: { username: req.body.username},
         });
@@ -13,6 +14,7 @@ router.post('/login', async (req, res) => {
             res.status(404).json({message: "Incorrect username or password."});
             return;
         }
+        console.log(req.body)
         const validPassword = await userData.checkPassword(req.body.password);
         if (!validPassword) {
             res.status(404).json({message: "Incorrect username or password."});

@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, Track, Playlist, PlaylistTrack } = require("../../models");
+const { User, Playlist } = require("../../models");
 // connect auth if needed
 
 // getting playlist route
@@ -9,10 +9,10 @@ router.get('/', async (req, res) => {
             attributes: ["id", "title", "userId", "createdOut"],
             order: [["createdOut", "ASC"]],
             include: {
-                model: Playlist
+                model: User
             }
         });
-        res.status(200).json(Playlist);
+        res.status(200).json(playlist);
     } catch (err) {
         res.status(500).json(err);
     }
@@ -21,12 +21,12 @@ router.get('/', async (req, res) => {
 // getting playlist by playlistId
 router.get("/:playlistId", async (req, res) => {
     try {
-      const Playlist = await Playlist.findOne({
+      const playlist = await Playlist.findOne({
         where: {
-          id: req.params.id,
+          id: req.params.playlistId,
         },
       });
-      res.status(200).json(Playlist);
+      res.status(200).json(playlist);
     } catch (err) {
       res.status(500).json(err);
     }
@@ -38,7 +38,7 @@ router.get("/:playlistId", async (req, res) => {
     try {
       const newPlaylist = await Playlist.create({
         ...req.body,
-        user_id: req.session.user_id,
+        userId: req.session.user_id,
       });
       res.status(200).json(newPlaylist);
     } catch (err) {
@@ -49,11 +49,11 @@ router.get("/:playlistId", async (req, res) => {
   // update playlist 
   router.put("/:playlistId", async (req, res) => {
     try {
-      const newPlaylist = await Playlist.update(req.body,{
+      const updatedPlaylist = await Playlist.update(req.body,{
         where: {
-          id: req.params.id,
+          id: req.params.playlistId,
         }})
-      res.status(200).json(newPlaylist);
+      res.status(200).json(updatedPlaylist);
     } catch (err) {
       console.error(err)
       res.status(400).json(err);
@@ -64,16 +64,16 @@ router.get("/:playlistId", async (req, res) => {
   // delete playlist
   router.delete("/:playlistId", async (req, res) => {
     try {
-      const Playlist = await Playlist.destroy({
+      const deletePlaylist = await Playlist.destroy({
         where: {
-          id: req.params.id,
+          id: req.params.playlistId,
         },
       });
-      if (!Playlist) {
+      if (!deletePlaylist) {
         res.status(404).json({ message: "No playlist found with this id!" });
         return;
       }
-      res.status(200).json(Playlist);
+      res.status(200).json(deletePlaylist);
     } catch (err) {
       res.status(500).json(err);
     }
