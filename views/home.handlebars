@@ -1,23 +1,25 @@
-<div>
+<section class="container">
+<div class="first-section">
     <h2>Create Playlist</h2>
 
     <section class="createPlaylist">
       <form>
-        <label for="title">Title</label>
-        <input type="text" class="title" name="title">
-        <button type="submit" id="titleBtn">🔍</button>
+        <label for="title">Title:</label>
+        <input type="text" class="title" id="search-input" name="title">
+        <button type="submit" id="titleBtn" class="input-btn">🔍</button>
+        {{!-- <p>and/or</p> --}}
+        <label for="genre">Genre:</label>
+        <input type="text" class="genre" id="search-input" name="genre">
+        <button type="submit" id="genreBtn" class="input-btn">🔍</button>
+        {{!-- <p>and/or</p> --}}
+        <label for="artist">Artist:</label>
+        <input type="text" class="artist" id="search-input" name="artist">
+        <button type="submit" id="artistBtn" class="input-btn">🔍</button>
+        {{!-- <p>and/or</p> --}}
+        <label for="album">Album:</label>
+        <input type="text" class="album" id="search-input" name="album">
+        <button type="submit" id="albumBtn" class="input-btn">🔍</button>
 
-        <label for="genre">Genre</label>
-        <input type="text" class="genre" name="genre">
-        <button type="submit" id="genreBtn">🔍</button>
-
-        <label for="artist">Artist</label>
-        <input type="text" class="artist" name="artist">
-        <button type="submit" id="artistBtn">🔍</button>
-
-        <label for="album">Album</label>
-        <input type="text" class="album" name="album">
-        <button type="submit" id="albumBtn">🔍</button>
       </form>
     </section>
 </div>
@@ -35,6 +37,8 @@
         {/* <!-- Selected songs will be added here --> */}
     </ul>
 </div>
+</section>
+
 
 <button id="savePlaylistBtn">Save Playlist</button>
 
