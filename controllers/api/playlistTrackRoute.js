@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { PlaylistTrack } = require("../models");
+const { PlaylistTrack } = require("../../models");
 
 router.post("/", async (req, res) => {
   try {
