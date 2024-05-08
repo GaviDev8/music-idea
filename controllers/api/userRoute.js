@@ -3,6 +3,15 @@ const router = require('express').Router();
 const { User } = require("../../models");
 const auth = require('../../utils/auth');
 
+// Get the user ID from session
+router.get("/session", (req, res) => {
+  if (req.session && req.session.user_id) {
+    res.json({ userId: req.session.user_id });
+  } else {
+    res.status(401).json({ error: "User not logged in" });
+  }
+});
+
 // user login 
 router.post('/login', async (req, res) => {
    console.log('login')
