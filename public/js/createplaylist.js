@@ -11,9 +11,16 @@ document.addEventListener("DOMContentLoaded", function() {
     genreBtn.addEventListener('click', function(event) {
         event.preventDefault();
         const genre = genreInput.value.trim();
+        //get url for api data
+        const url = ``
         if (genre !== '') {
             // Fetch songs based on genre and render search results
-            const searchResults = fetchSongsByGenre(genre); // Example function call
+            const searchResults = fetch(url,{
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+            });
             renderSearchResults(searchResults);
         }
     });
