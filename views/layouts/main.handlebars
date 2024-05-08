@@ -8,6 +8,7 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="./css/styles.css">
 </head>
+<body>
 <header>
     <div class="head1">
         <div class="logo">
@@ -21,17 +22,21 @@
         </div>
         {{#if logged_in}}
         <nav class="navbar">
-            <a href="#">Login/Logout</a>
-            <a href="#">Play List</a>
-            <a href="#">Create Playlist</a>
+            <ul>
+                <li>
+                    <a href="#" id="logout">Logout</a>
+                 </li>
+                <li>
+                    <a href="#">Play List</a>
+                </li>
+                <li>
+                    <a href="#">Create Playlist</a>
+                </li>
+            </ul>
         </nav>
         {{/if}}
         </div>
 </header>
-
-
-
-
 <main>
 {{{body}}}
 </main>
@@ -49,3 +54,8 @@
     </section>  
     <p>&copy; 2024 Created By Groov Group</p>
 </footer>
+{{#if logged_in}}
+<script src="/js/logout.js"></script>
+{{/if}}
+</body>
+</html>
