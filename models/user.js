@@ -1,5 +1,6 @@
 const { Model, DataTypes } = require("sequelize");
 const sequelize = require("../config/config");
+const bcrypt = require("bcrypt");
 
 class User extends Model {
   checkPassword(loginPw) {
@@ -35,6 +36,12 @@ User.init(
     },
   },
   {
+    hooks:{
+      beforeCreate: async(user) => {
+        user.password = await bcrypt.hash(user.password,10);
+        return user
+      }
+    },
     sequelize,
     modelName: "User",
     tableName: "groov_users",

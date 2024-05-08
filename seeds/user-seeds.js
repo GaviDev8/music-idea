@@ -6,7 +6,10 @@ const seedUsers = async () => {
     const users = await User.bulkCreate([
       { username: 'user1', password: 'password123' },
       { username: 'user2', password: 'password123' }
-    ]);
+    ], {
+      individualHooks:true,
+      returning: true
+    });
     // Checking if we already made these specific users
     console.log('Users seeded');
     return users;
