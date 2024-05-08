@@ -28,6 +28,5 @@ module.exports = {
   User,
   Playlist,
   Track,
-  PlaylistTrack,
-  sequelize
+  PlaylistTrack
 };

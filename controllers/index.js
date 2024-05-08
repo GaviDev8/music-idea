@@ -1,8 +1,11 @@
 const router = require('express').Router();
 const apiRoutes = require('./api');
-const playlistTrackController = require('./playlistTrackController');
+const playlistTrack = require('./playlistTrackController');
+const homepage = require('./homepageController');
 
+router.use('/', homepage);
+router.use('/playlistTrack', playlistTrack);
 router.use('/api', apiRoutes);
-router.use('/', playlistTrackController);
+
 
 module.exports = router;
