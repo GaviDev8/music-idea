@@ -34,8 +34,7 @@ router.get("/", async (req, res) => {
         title: req.body.title,
         artist: req.body.artist,
         album: req.body.album,
-        imageURL: req.body.imageURL,
-        userId: req.session.user_id,
+        imageURL: req.body.imageURL
       });
       res.status(200).json(newTrack);
     } catch (err) {
