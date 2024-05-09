@@ -33,7 +33,6 @@ router.get("/:playlistId", async (req, res) => {
   });
 
   // new playlist
-  // should i include the auth there?
   router.post("/", async (req, res) => {
     try {
       // Title
