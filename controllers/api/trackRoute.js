@@ -1,46 +1,46 @@
-const router = require('express').Router();
-const { Track } = require('../../models');
+const router = require("express").Router();
+const { Track, PlaylistTrack } = require("../../models");
 
-// find all tracks - may not need?
-router.get("/", async (req, res) => {
+router.post("/", async (req, res) => {
   try {
-    const tracks = await Track.findAll();
-    res.status(200).json(tracks);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json(err);
-  }
-});
-  
-  // find tracks by id
-  router.get("/:id", async (req, res) => {
-    try {
-      const tracks = await Track.findOne({
-        where: {
-          id: req.params.id,
-        },
-      });
-      res.status(200).json(track);
-    } catch (err) {
-      res.status(500).json(err);
-    }
-  });
-  
-  // post track 
-  router.post("/", async (req, res) => {
-    try {
-      console.log(req.body);
-      const newTrack = await Track.create({
+    console.log(req.body);
+
+    // Check for duplicates
+    const existingTrack = await Track.findOne({
+      where: {
         title: req.body.title,
         artist: req.body.artist,
-        album: req.body.album,
-        imageURL: req.body.imageURL
+      },
+    });
+
+    if (existingTrack) {
+      // If the track already exists, add it to playlist
+      await PlaylistTrack.create({
+        playlistId: req.body.playlistId,
+        trackId: existingTrack.id,
       });
-      res.status(200).json(newTrack);
-    } catch (err) {
-      res.status(400).json(err);
-      console.log(err);
+      return res.status(200).json(existingTrack);
     }
-  });
-  
-  module.exports = router;
+
+    // Create a new track if it doesn't exist
+    const newTrack = await Track.create({
+      title: req.body.title,
+      artist: req.body.artist,
+      album: req.body.album,
+      imageURL: req.body.imageURL,
+    });
+
+    // Add new track to the playlist
+    await PlaylistTrack.create({
+      playlistId: req.body.playlistId,
+      trackId: newTrack.id,
+    });
+
+    res.status(200).json(newTrack);
+  } catch (err) {
+    console.error("Error creating track:", err);
+    res.status(400).json(err);
+  }
+});
+
+module.exports = router;

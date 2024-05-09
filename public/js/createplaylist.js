@@ -32,16 +32,15 @@ $(document).ready(function () {
       const $selectedSongsContainer = $("#selectedSongs");
       const $listItem = $(`
         <li data-id="${track.id}">
-          <button class="removeTrackBtn">
-            ${track.title} by ${track.artist} (Album: ${track.album.title})
-          </button>
+          ${track.title} by ${track.artist} (Album: ${track.album.title})
+          <button class="removeTrackBtn">Remove</button>
         </li>
       `);
       $selectedSongsContainer.append($listItem);
 
-      // Event listener for removing tracks
+      // Remove track from the list
       $listItem.find(".removeTrackBtn").on("click", function () {
-        removeTrackFromList(track.id);
+        removeTrackFromList($(this).closest("li").data("id"));
       });
     }
   }
@@ -49,7 +48,11 @@ $(document).ready(function () {
   // Remove a track from the selected songs list
   function removeTrackFromList(trackId) {
     selectedTracks = selectedTracks.filter((track) => track.id !== trackId);
-    $(`#selectedSongs li[data-id="${trackId}"]`).remove();
+    const $selectedSongsContainer = $("#selectedSongs");
+    const $listItem = $selectedSongsContainer.find(`[data-id="${trackId}"]`);
+    if ($listItem.length) {
+      $listItem.remove();
+    }
   }
 
   // Fetch tracks from the server
@@ -111,38 +114,29 @@ $(document).ready(function () {
   $("#savePlaylistBtn").on("click", async () => {
     const playlistTitle = prompt("Enter the playlist title:");
     if (!playlistTitle || !selectedTracks.length) {
-      alert("Please enter a valid playlist title and select at least one song.");
+      alert("Please enter a playlist title and select at least one song!");
       return;
     }
 
     try {
-      // Get user id from session
-      const userResponse = await fetch("/api/user/session");
-      if (!userResponse.ok) {
-        throw new Error("Failed to fetch user session data");
-      }
-      const { userId } = await userResponse.json();
-
       // Create playlist
       const playlistResponse = await fetch("/api/playlist", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ title: playlistTitle, userId }),
+        body: JSON.stringify({ title: playlistTitle }),
       });
 
       if (!playlistResponse.ok) {
-        throw new Error(
-          `Failed to create playlist: ${playlistResponse.statusText}`
-        );
+        throw new Error(`Failed to create playlist: ${playlistResponse.statusText}`);
       }
 
       const playlist = await playlistResponse.json();
 
       // Create all tracks and associate with the playlist
-      const trackPromises = selectedTracks.map((track) => {
-        return fetch("/api/track", {
+      const trackPromises = selectedTracks.map((track) =>
+        fetch("/api/track", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -152,6 +146,7 @@ $(document).ready(function () {
             artist: track.artist,
             album: track.album.title,
             imageURL: track.album.artwork,
+            playlistId: playlist.id,
           }),
         })
           .then((response) => {
@@ -160,22 +155,12 @@ $(document).ready(function () {
             }
             return response.json();
           })
-          .then((trackData) => {
-            return fetch("/api/playlistTrack", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                playlistId: playlist.id,
-                trackId: trackData.id,
-              }),
-            });
-          });
-      });
+      );
 
       await Promise.all(trackPromises);
-      alert(`Playlist "${playlistTitle}" has been saved successfully!`);
+
+      // Redirect to the new playlist page using our uuid
+      window.location.href = `/api/playlist/${playlist.publicId}`;
     } catch (error) {
       console.error("Error saving playlist:", error);
       alert("Failed to save the playlist.");
