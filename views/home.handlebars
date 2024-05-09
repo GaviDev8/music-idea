@@ -42,9 +42,9 @@
 
 <button id="savePlaylistBtn">Save Playlist</button>
 {{#if playlist}}
-  <div>
-    <h2>Your Playlist</h2>
-    <div id="">
+  <div class="user-playlists">
+    <h2>Your Playlist:</h2>
+    <div id="playlist-folder">
       {{#each playlist}}
       {{> playlistPartial}}
     {{/each}}
