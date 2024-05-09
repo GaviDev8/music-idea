@@ -1,13 +1,22 @@
- <section id="playlistContainer">
-       {{#each userPlaylists}}
-        <div class='row'>
-          <ul class="song_list">
-            {{#each Track}}
-            {{> track}}
-             {{/each}}
-          </ul>
-        </div>
-    </section>
+{{!< layouts/main}}
+{{#with playlist}}
+
+<h1>Playlist: {{title}} {{id}}</h1>
+<div class="container">
+   {{#each tracks}}
+      <div class="item">
+         {{> track playlistId=../id}}
+      </div>
+      {{#if isEndOfRow }}
+         </div>
+         {{#if isNotLast}}
+         <div class="container">
+         {{/if}}
+      {{/if}}
+   {{/each}}
+</div>
+{{/with}}
+<script src="/js/playlist.js"></script>
 
     {{!-- <i class='bx bx-trash'></i> --}}
     {{!-- <i class='bx bx-add-to-queue' ></i> --}}
