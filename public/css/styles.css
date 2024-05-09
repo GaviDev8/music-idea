@@ -74,8 +74,8 @@ header .navbar ul {
 }
 
 header .navbar a {
-    color: #fff;
-    font-size: 20px;
+    color: #272323;
+    font-size: 40px;
     text-decoration: none;
     margin: 0 250px;
     padding: 10px;
@@ -90,7 +90,7 @@ header .navbar a:hover {
 }
 header .page-name h1 {
     font-size: 150px;
-    color: rgba(255, 255, 255, 0.5);
+    color: #99ce13;
     margin: 20px 10px;
     text-shadow: 0 0 10px rgba(221, 78, 78, 0.5);
     
@@ -608,7 +608,7 @@ main {
 
   }
   #playlist-folder .title-name h2 {
-    font-size: 30px;
+    font-size: 80px;
     color: #070606;
     margin-bottom: 20px;
     border: 1px solid #e59a9a;
