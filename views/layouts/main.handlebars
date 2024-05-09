@@ -1,65 +1,67 @@
-<!DOCTYPE html>
-<html lang="en">
+<html lang='en'>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset='UTF-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
     <title>Groov Playlist Creater</title>
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="./css/styles.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-</head>
-<body>
-    
-<header>
-    <div class="head1">
-        <div class="logo">
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
+    <link
+      href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css'
+      rel='stylesheet'
+    />
+    <link rel='stylesheet' href='./css/styles.css' />
+    <script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
+  </head>
+  <body>
+
+    <header>
+      <div class='head1'>
+        <div class='logo'>
+          <div class='bar'></div>
+          <div class='bar'></div>
+          <div class='bar'></div>
+          <div class='bar'></div>
         </div>
-        <div class="page-name">
-            <h1>Groov</h1>
+        <div class='page-name'>
+          <h1>Groov</h1>
+        </div>
         </div>
         {{#if logged_in}}
-        <nav class="navbar">
+          <nav class='navbar'>
             <ul>
-                <li>
-                    <a href="#" id="logout">Logout</a>
-                 </li>
-                <li>
-                    <a href="#">Play List</a>
-                </li>
-                <li>
-                    <a href="#">Create Playlist</a>
-                </li>
+              <li>
+                <a href='#' id='logout'>Logout</a>
+              </li>
+              <li>
+                <a href='#'>Play List</a>
+              </li>
+              <li>
+                <a href='#'>Create Playlist</a>
+              </li>
             </ul>
-        </nav>
+          </nav>
         {{/if}}
+    </header>
+    <main>
+      {{{body}}}
+    </main>
+    <footer class='footer'>
+      <section id='groov-group'>
+        <h2>Groov Group</h2>
+        <div class='github-acc'>
+          <address>
+            <a href='https://github.com/GaviDev8'>Gabriela</a>
+            <a href='https://github.com/DeceitfulDragon'>Hunter</a>
+            <a href='https://github.com/Moe1362'>Moe</a>
+            <a href='https://github.com/ccreed86'>Cliff</a>
+          </address>
         </div>
-</header>
-<main>
-{{{body}}}
-</main>
-<footer class="footer">
-    <section id="groov-group" >
-    <h2>Groov Group</h2>
-        <div class="github-acc">
-            <address>
-                <a href="https://github.com/GaviDev8">Gabriela</a>
-                <a href="https://github.com/DeceitfulDragon">Hunter</a>
-                <a href="https://github.com/Moe1362">Moe</a>
-                <a href="https://github.com/ccreed86">Cliff</a>
-            </address>
-        </div>
-    </section>  
-  <div class="comment">
-    <p>&copy; 2024 Created By Groov Group</p>
-   </div>
-</footer>
-{{#if logged_in}}
-<script src="/js/logout.js"></script>
-{{/if}}
-</body>
+      </section>
+      <div class='comment'>
+        <p>&copy; 2024 Created By Groov Group</p>
+      </div>
+    </footer>
+    {{#if logged_in}}
+      <script src='/js/logout.js'></script>
+    {{/if}}
+  </body>
 </html>

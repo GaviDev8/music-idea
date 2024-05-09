@@ -36,4 +36,8 @@ router.get("/login", async (req, res) => {
     res.render("login");
   });
 
+  router.post("/playlist/:id", async (req, res) => {
+    
+  });
+
   module.exports = router;

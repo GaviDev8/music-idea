@@ -1,6 +1,6 @@
 <section class="container">
 <div class="first-section">
-    <h2>Create Playlist</h2>
+    <h2>Search</h2>
 
     <section class="createPlaylist">
       <form>
@@ -23,23 +23,35 @@
       </form>
     </section>
 </div>
-<div>
+<div class="mid-section">
     <h2>Recommendations</h2>
     <section id="searchResults">
-        {/* <!-- Results will be rendered here --> */}
+        
     </section>
 </div>
 
-<div>
+<div class="last-section">
     <h2>Selected Songs</h2>
 
     <ul id="selectedSongs">
-        {/* <!-- Selected songs will be added here --> */}
+       
     </ul>
 </div>
 </section>
 
 
 <button id="savePlaylistBtn">Save Playlist</button>
+{{#if playlist}}
+  <div>
+    <h2>Your Playlist</h2>
+    <div id="">
+      {{#each playlist}}
+      {{> playlistPartial}}
+    {{/each}}
+    </div>
+    
+  </div>
+    
+{{/if}}
 
 <script src="/js/createplaylist.js"></script>
