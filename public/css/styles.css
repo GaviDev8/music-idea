@@ -241,7 +241,7 @@ footer {
 
 #groov-group h2 {
     font-size: 30px;
-    color: rgba(61, 180, 73, 0.5);
+    color: #99ce13;
     text-align: center;
     padding-bottom: 20px;
 }
@@ -497,7 +497,7 @@ main {
 #savePlaylistBtn {
     align-items: center;
     width: 20%;
-    height: 40px;
+    height: 100px;
     background: linear-gradient(to right, #071623, #ecd1da);
     box-shadow: 0 2px 10px rgba(0, 0, 0, .4);
     font-size: 20px;
@@ -509,6 +509,19 @@ main {
     outline: none;
     margin-top: 50px;
     margin-left: 20px;
+}
+#savePlaylistBtn:hover {
+    background: #99ce13;
+    color: #1f242d;
+    border-radius: 5px;
+    box-shadow: 0 0 20px #99ce13;
+}
+#savePlaylistBtn:active {
+    background: #99ce13;
+    color: #1f242d;
+    border-radius: 5px;
+    box-shadow: 0 0 20px #99ce13;
+    
 }
 
 .container {
@@ -590,13 +603,25 @@ main {
     height: 100%;
     margin-top: 20px;
     padding: 0 50px;
+    opacity: 0;
+    animation: slideLeft 3s ease forwards;
 
+  }
+  #playlist-folder .title-name h2 {
+    font-size: 30px;
+    color: #070606;
+    margin-bottom: 20px;
+    border: 1px solid #e59a9a;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, .4);
+    padding: 8px;
   }
 
   #song-img i {
     font-size: 100px;
     color: pink;
     margin-top: 20px;
+    
   } 
 
   #song-img i:hover {
