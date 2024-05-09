@@ -1,47 +1,28 @@
-{{!< layouts/main}}
-{{#with playlist}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{playlist.title}}</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <header>
+    <h1>{{playlist.title}}</h1>
+    <h2>Created by User {{playlist.userId}}</h2>
+  </header>
 
-<h1>Playlist: {{title}} {{id}}</h1>
-<div class="container">
-   {{#each tracks}}
-      <div class="item">
-         {{> track playlistId=../id}}
-      </div>
-      {{#if isEndOfRow }}
-         </div>
-         {{#if isNotLast}}
-         <div class="container">
-         {{/if}}
-      {{/if}}
-   {{/each}}
-</div>
-{{/with}}
-<script src="/js/playlist.js"></script>
-
-    {{!-- <i class='bx bx-trash'></i> --}}
-    {{!-- <i class='bx bx-add-to-queue' ></i> --}}
-    
-    
-    
-    {{!-- <script id="playlist-template" type="text/x-handlebars-template">
-      {{#each userPlaylists}}
-        <section class='row'>
-          {{#each this}}
-            <section class='col'>
-              <section class='playlist-info'>
-                <section><img
-                    src='{{imageURL}}'
-                    alt='Album Image'
-                  /></section>
-                  <section>{{title}} <br />{{artist}} <br />{{album}}</section>
-
-              </section>
-            </section>
-          {{/each}}
-        </section>
+  <section>
+    <h3>Tracks:</h3>
+    <ul>
+      {{#each tracks}}
+        <li>
+          <h4>{{title}}</h4>
+          <p>Artist: {{artist}}</p>
+          <p>Album: {{album}}</p>
+          {{#if imageURL}}
+            <img src="{{imageURL}}" alt="Album artwork">
+          {{/if}}
+        </li>
       {{/each}}
-    </script> --}}
-
-    {{!-- <script src="/js/playlist.js"></script> --}}
- 
-
+    </ul>
+  </section>

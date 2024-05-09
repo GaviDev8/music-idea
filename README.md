@@ -13,8 +13,12 @@ Key Features:
 4. Playlist Sharing: Share your curated playlists with friends, family, or the world, fostering a sense of community and musical discovery.
 
 Future Features:
-1. Stream Music
-2. Upload your own music 
+1. Add track to a playlist from within the playlist itself
+2. Stream Music
+3. Upload your own music 
+4. Login with a QR code
+5. Make available in app store for mobile use
+6. Redirect to create playlist in homepage
 
 ## Lessons Learned
 Through working on this project, we gained a great understanding of javascript and data manipulation. Improved skills in HTML, CSS, JS, PostgreSQL, Project Management and team collaboration.
