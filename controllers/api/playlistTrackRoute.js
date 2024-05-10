@@ -13,4 +13,20 @@ router.post("/", async (req, res) => {
   }
 });
 
+// Delete track from playlist
+router.delete("/", async (req, res) => {
+  try {
+    const { playlistId, trackId } = req.body;
+    const playlistTrack = await PlaylistTrack.destroy({
+      where: {
+        playlistId: playlistId,
+        trackId: trackId,
+      },
+    });
+    res.status(200).json(playlistTrack);
+  } catch (err) {
+    res.status(400).json(err);
+    console.log(err);
+  }
+});
 module.exports = router;

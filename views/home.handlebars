@@ -1,57 +1,60 @@
-<section class="container">
-<div class="first-section">
-    <h2>Search</h2>
-
-    <section class="createPlaylist">
-      <form>
+<div class="playlists">
+  <div class="playlists-create">
+    <div class="playlists-step">
+      <div class="step-title">Search</div>
+      <hr>
+      <form class="search-form">
+        <div class="search-item">
         <label for="title">Title:</label>
         <input type="text" class="title" id="search-input" name="title">
         <button type="submit" id="titleBtn" class="input-btn">🔍</button>
-
+      </div>
+      <div class="search-item">
         <label for="genre">Genre:</label>
         <input type="text" class="genre" id="search-input" name="genre">
         <button type="submit" id="genreBtn" class="input-btn">🔍</button>
-
+      </div>
+      <div class="search-item">
         <label for="artist">Artist:</label>
         <input type="text" class="artist" id="search-input" name="artist">
         <button type="submit" id="artistBtn" class="input-btn">🔍</button>
-
+      </div>
+      <div class="search-item">
         <label for="album">Album:</label>
         <input type="text" class="album" id="search-input" name="album">
         <button type="submit" id="albumBtn" class="input-btn">🔍</button>
-
-      </form>
-    </section>
-</div>
-<div class="mid-section">
-    <h2>Recommendations</h2>
-    <section id="searchResults">
-        
-    </section>
-</div>
-
-<div class="last-section">
-    <h2>Selected Songs</h2>
-
-    <ul id="selectedSongs">
-       
-    </ul>
-</div>
-</section>
-
-
-<button id="savePlaylistBtn">Save Playlist</button>
-{{#if playlist}}
-  <div class="user-playlists">
-    <h2>Your Playlist</h2>
-    <div id="playlist-folder">
+      </div>
+      </form>         
+  </div>
+    <div class="playlists-step">
+      <div class="step-title">Recommendations</div>
+      <hr>
+      <section id="searchResults" class="search-results"/>
+    </div>
+    <div class="playlists-step">
+      <div class="step-title">Selected Songs</div>
+      <hr>
+      <section id="selectedSongs" class="search-results"/>
+      
+    </div>
+    
+    
+  </div>
+  <div class="saveplaylist">
+      <button id="savePlaylistBtn">Save Playlist</button>
+    </div>
+  <div class="playlists-show">
+    {{#if playlist}}
       {{#each playlist}}
       {{> playlistPartial}}
     {{/each}}
-    </div>
-    
+ {{/if}}
   </div>
-    
-{{/if}}
+</div>
+
+
+
+
+
 
 <script src="/js/createplaylist.js"></script>

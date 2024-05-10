@@ -31,16 +31,17 @@ $(document).ready(function () {
 
       const $selectedSongsContainer = $("#selectedSongs");
       const $listItem = $(`
-        <li data-id="${track.id}">
-          ${track.title} by ${track.artist} (Album: ${track.album.title})
-          <button class="removeTrackBtn">Remove</button>
-        </li>
+        <div class="search-result">
+          <button class="removeTrackBtn" data-id="${track.id}">
+            ${track.title} by ${track.artist} (Album: ${track.album.title})
+          </button>
+        </div>
       `);
       $selectedSongsContainer.append($listItem);
 
       // Remove track from the list
       $listItem.find(".removeTrackBtn").on("click", function () {
-        removeTrackFromList($(this).closest("li").data("id"));
+        removeTrackFromList($(this).data("id"));
       });
     }
   }
