@@ -16,22 +16,18 @@ $(document).ready(function () {
       `);
       $trackButton.data("track", track);
       $searchResultsContainer.append($trackButton);
-
-      // Event listener for each button
-      $trackButton.find(".addTrackBtn").on("click", function () {
-        addTrackToList($(this).closest(".search-result").data("track"));
-      });
     });
   }
 
   // Add a track to the selected songs list
   function addTrackToList(track) {
-    if (!selectedTracks.some((t) => t.id === track.id)) {
+    // Checking for duplicates
+    if (!selectedTracks.some((t) => t.title === track.title && t.artist === track.artist)) {
       selectedTracks.push(track);
 
       const $selectedSongsContainer = $("#selectedSongs");
       const $listItem = $(`
-        <div class="search-result">
+        <div class="selected-track" data-id="${track.id}">
           <button class="removeTrackBtn" data-id="${track.id}">
             ${track.title} by ${track.artist} (Album: ${track.album.title})
           </button>
@@ -43,6 +39,10 @@ $(document).ready(function () {
       $listItem.find(".removeTrackBtn").on("click", function () {
         removeTrackFromList($(this).data("id"));
       });
+
+      console.log("Added track:", track);
+    } else {
+      console.log("Track already selected:", track);
     }
   }
 
@@ -54,6 +54,7 @@ $(document).ready(function () {
     if ($listItem.length) {
       $listItem.remove();
     }
+    console.log("Removed track with ID:", trackId);
   }
 
   // Fetch tracks from the server
@@ -71,44 +72,47 @@ $(document).ready(function () {
     }
   }
 
+  // Search handler function
+  async function handleSearch(query) {
+    if (query) {
+      const results = await fetchTracks(query);
+      renderSearchResults(results);
+    }
+  }
+
   // Search by title
   $("#titleBtn").on("click", async (event) => {
     event.preventDefault();
     const title = $(".title").val().trim();
-    if (title) {
-      const results = await fetchTracks(title);
-      renderSearchResults(results);
-    }
+    await handleSearch(title);
   });
 
   // Search by genre
   $("#genreBtn").on("click", async (event) => {
     event.preventDefault();
     const genre = $(".genre").val().trim();
-    if (genre) {
-      const results = await fetchTracks(genre);
-      renderSearchResults(results);
-    }
+    await handleSearch(genre);
   });
 
   // Search by artist
   $("#artistBtn").on("click", async (event) => {
     event.preventDefault();
     const artist = $(".artist").val().trim();
-    if (artist) {
-      const results = await fetchTracks(artist);
-      renderSearchResults(results);
-    }
+    await handleSearch(artist);
   });
 
   // Search by album
   $("#albumBtn").on("click", async (event) => {
     event.preventDefault();
     const album = $(".album").val().trim();
-    if (album) {
-      const results = await fetchTracks(album);
-      renderSearchResults(results);
-    }
+    await handleSearch(album);
+  });
+
+  // Add track to the list
+  $("#searchResults").on("click", ".addTrackBtn", function () {
+    const track = $(this).closest(".search-result").data("track");
+    console.log("Trying to add track:", track);
+    addTrackToList(track);
   });
 
   // Save playlist button
