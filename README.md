@@ -34,6 +34,6 @@ Dependencies: green-code/music-track-data, bcrypt,connect-session-sequelize, dot
  
 ![Mock-up of login page ](/assets/Login%20page.png)
 
-Demo link: https://groov.onrender.com/login
+Live link: https://groov.onrender.com/login
 
 Presentation slides: https://docs.google.com/presentation/d/11Ije85IwyA84rpQwrfQzlCDsAFtp71VtWPSimbs4FfM/edit?usp=sharing
