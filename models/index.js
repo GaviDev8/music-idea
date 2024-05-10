@@ -9,7 +9,7 @@ const PlaylistTrack = require('./playlistTrack');
 
 // Relationships
 User.hasMany(Playlist, { foreignKey: 'userId' });
-Playlist.belongsTo(User, { foreignKey: 'userId' });
+Playlist.belongsTo(User, { foreignKey: 'userId'});
 
 Playlist.belongsToMany(Track, {
   through: PlaylistTrack,

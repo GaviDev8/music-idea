@@ -21,7 +21,7 @@ router.get("/", async (req, res) => {
 // Get playlist by publicId
 router.get("/:publicId", async (req, res) => {
   try {
-    const playlist = await Playlist.findOne({
+    let playlist = await Playlist.findOne({
       where: {
         publicId: req.params.publicId,
       },
@@ -30,16 +30,22 @@ router.get("/:publicId", async (req, res) => {
           model: Track,
           as: "tracks",
         },
+        {model: User}
       ],
     });
-
+    playlist = playlist.get({ plain: true });
+    console.log(playlist);
+    const user = playlist.User.username;
     if (!playlist) {
       return res.status(404).json({ message: "Playlist not found" });
     }
-
     res.render("playlist", {
       playlist,
+      user,
       tracks: playlist.tracks,
+      logged_in: true,
+      showCreateMenu: true,
+      showPlaylistMenu: false
     });
   } catch (err) {
     console.error("Error fetching playlist:", err);

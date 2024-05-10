@@ -1,28 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>{{playlist.title}}</title>
-  <link rel="stylesheet" href="/css/styles.css">
-</head>
-<body>
-  <header>
-    <h1>{{playlist.title}}</h1>
-    <h2>Created by User {{playlist.userId}}</h2>
-  </header>
+<div class='playlist'>
+  <div class='playlist-header'>
+    <div class='playlist-title'>{{playlist.title}}</div>
+  </div>
 
-  <section>
-    <h3>Tracks:</h3>
-    <ul>
-      {{#each tracks}}
-        <li>
-          <h4>{{title}}</h4>
-          <p>Artist: {{artist}}</p>
-          <p>Album: {{album}}</p>
-          {{#if imageURL}}
-            <img src="{{imageURL}}" alt="Album artwork">
-          {{/if}}
-        </li>
-      {{/each}}
-    </ul>
-  </section>
+  <div class='track-list'>
+    {{#each tracks}}
+      <div class='track'>
+        {{#if imageURL}}
+          <img src='{{imageURL}}' class='track-img' alt='Album artwork' />
+        {{/if}}
+        <div class='track-title'>{{title}}</div>
+        <div class='track-artist'>Artist:<span class="track-inf">{{artist}}</span></div>
+        <div class='track-album'>Album:<span class="track-inf">{{album}}</span></div>
+        <button data-trackId="{{id}}" class="delete-btn" data-playlistId="{{../playlist.id}}"><i class='bx bx-trash' ></i></button>
+
+      </div>
+
+    {{/each}}
+
+  </div>
+</div>
+<script src="/js/playlist.js"></script>
