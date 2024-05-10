@@ -8,13 +8,13 @@
       href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css'
       rel='stylesheet'
     />
-    <link rel='stylesheet' href='./css/styles.css' />
+    <link rel='stylesheet' href='/css/styles.css' />
     <script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
   </head>
   <body>
 
     <header>
-      <div class='head1'>
+      <div class="head">
         <div class='logo'>
           <div class='bar'></div>
           <div class='bar'></div>
@@ -22,23 +22,22 @@
           <div class='bar'></div>
         </div>
         <div class='page-name'>
-          <h1>Groov</h1>
+          <div class="page-title">Groov</div>
         </div>
         </div>
         {{#if logged_in}}
-          <nav class='navbar'>
-            <ul>
-              <li>
-                <a href='#' id='logout'>Logout</a>
-              </li>
-              <li>
-                <a href='#'>Play List</a>
-              </li>
-              <li>
-                <a href='#'>Create Playlist</a>
-              </li>
-            </ul>
-          </nav>
+        <div class="menu">
+          <div class="menu-group">
+            <div class="user-item">User Name: {{user}}</div>
+          </div>
+          <div class="menu-group">
+            {{#if showCreateMenu}}
+            <div class="menu-item"><a href='/'>Create Playlist</a></div>
+            {{/if}}
+            <div class="menu-item"><a href='#' id='logout'>Logout</a></div>
+          </div>
+          
+        </div>
         {{/if}}
     </header>
     <main>
@@ -46,7 +45,7 @@
     </main>
     <footer class='footer'>
       <section id='groov-group'>
-        <h2>Groov Group</h2>
+        <div class="group-name">Groov Group</div>
         <div class='github-acc'>
           <address>
             <a href='https://github.com/GaviDev8'>Gabriela</a>

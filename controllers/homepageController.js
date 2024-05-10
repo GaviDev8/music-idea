@@ -7,11 +7,12 @@ router.get("/", auth, async (req, res) => {
     try {  
     const playlistData = await Playlist.findAll({
       where: { userId: req.session.user_id}, 
-      include: [{model: Track, through: PlaylistTrack, as: 'tracks' }]
+      include: [{model: Track, through: PlaylistTrack, as: 'tracks' }, {model: User}]
     }); 
     const playlist = playlistData.map((list) => list.get({plain: true}))
-    console.log(playlist)  
-    res.render("home", {playlist, logged_in: req.session.logged_in});
+    // console.log(playlist)
+    const user = playlist[0].User.username  
+    res.render("home", {playlist, logged_in: req.session.logged_in, showCreateMenu: false, showPlaylistMenu: false, user});
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: "Error" });
@@ -37,7 +38,7 @@ router.get("/login", async (req, res) => {
   });
 
   router.post("/playlist/:id", async (req, res) => {
-    
+      
   });
 
   module.exports = router;
